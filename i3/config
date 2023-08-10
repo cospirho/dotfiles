@@ -127,10 +127,6 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 
-workspace 1 output DP-2
-workspace 2 output DP-1
-workspace 3 output HDMI-1
-
 # Define names for default workspaces for which we configure key bindings later on.
 # We use vjriables to avoid repeating the names in multiple places.
 set $ws1 "1"
@@ -143,6 +139,11 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
+
+# Get these from xrandr --listmonitors
+workspace $ws1 output DP-4
+workspace $ws2 output DP-2
+workspace $ws3 output HDMI-0
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1

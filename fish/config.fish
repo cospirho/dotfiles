@@ -75,6 +75,21 @@ function airpods
 
     if test $current_output = $hdmi_sink
         echo "Switching to AirPods"
+		if not test -n "$airpods_sink"
+			echo "connect 40:ED:CF:DE:8D:B1" | bluetoothctl
+		end
+		set timeout_counter 1
+		while true
+    		set airpods_sink (pactl list sinks | grep -i '40_ED_CF_DE_8D_B1' | awk '/Name:/{print $2}')
+			if test -n "$airpods_sink"
+				break
+			else if test $timeout_counter -ge 30
+				echo "Sink not available after 30 seconds...?"
+				exit 1
+			end
+			sleep 1
+			set timeout_counter (math $timeout_counter + 1)
+		end
         pactl set-default-sink $airpods_sink
         for stream_id in (pactl list sink-inputs | grep 'Sink Input #' | awk '{print $3}' | tr -d '#')
             pactl move-sink-input $stream_id $airpods_sink
@@ -85,6 +100,7 @@ function airpods
         for stream_id in (pactl list sink-inputs | grep 'Sink Input #' | awk '{print $3}' | tr -d '#')
             pactl move-sink-input $stream_id $hdmi_sink
         end
+		echo "disconnect 40:ED:CF:DE:8D:B1" | bluetoothctl
     else
         echo "Unknown default output: $current_output"
     end
