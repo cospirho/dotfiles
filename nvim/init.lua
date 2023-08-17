@@ -1,4 +1,6 @@
 vim.api.nvim_set_keymap('i', 'jj', '<Esc>', { noremap = true })
+vim.api.nvim_set_keymap('i', 'jk', '<Esc>', { noremap = true })
+vim.api.nvim_set_keymap('i', 'kj', '<Esc>', { noremap = true })
 vim.cmd [[set mouse=a]]
 -- otherwise vim replaces the content of current buffer with the new file you
 -- open. Or maybe deletes the current buffer and creates a new one. Either way,
