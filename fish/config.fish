@@ -109,6 +109,8 @@ end
 
 
 alias vim='nvim'
-
+export VISUAL=nvim
+export EDITOR=nvim
+export SHELL=/usr/bin/fish
 
 
