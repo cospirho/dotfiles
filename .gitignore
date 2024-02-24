@@ -1,0 +1,23 @@
+Code/
+dconf/
+bottom/
+discord/
+dunst/
+google-chrome/
+menus/
+Mullvad VPN/
+neofetch/
+nitrogen/
+obsidian/
+procps/
+pulse/
+Vencord/
+polybarbackup/
+vesktop/
+Thunar/
+gtk-2.0/gtkfilechooser.ini
+xfce4/xfconf/xfce-perchannel-xml/thunar.xml
+fish/fish_variables
+Microsoft/PowerAppsCli/usersettings.json
+ibus/bus/
+systemd/user/

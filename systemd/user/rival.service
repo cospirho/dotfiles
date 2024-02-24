@@ -3,8 +3,8 @@ Description=RivalCFG
 
 [Service]
 Type=simple
-#Next line is only required for Xorg, should be removed for Wayland
 ExecStart=/opt/rival/venv/bin/rivalcfg --z1 "040005" --z2 "040005" --z3 "040005" --logo-color "#040005"
+User=root
 
 [Install]
-WantedBy=graphical-session.target
+WantedBy=default.target

@@ -107,10 +107,11 @@ function airpods
 
 end
 
+function wp
+    ~/.config/i3/scripts/set_wallpaper.sh
+end
 
 alias vim='nvim'
 export VISUAL=nvim
 export EDITOR=nvim
 export SHELL=/usr/bin/fish
-
-

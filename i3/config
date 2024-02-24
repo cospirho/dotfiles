@@ -12,7 +12,7 @@
 set $mod Mod1
 
 #gaps
-for_window [class=".*"] border pixel 0
+for_window [class=".*"] border pixel 2
 gaps inner 0
 gaps outer 0
 smart_borders on
@@ -24,6 +24,7 @@ smart_borders on
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:DejaVu Sans Mono 8
+
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
@@ -41,19 +42,21 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 #custom stuff
-exec --no-startup-id nitrogen --restore
 exec --no-startup-id xrandr --output HDMI-0 --primary --mode 1920x1080 --pos 4480x360 --rotate normal --output DP-0 --off --output DP-1 --off --output DP-2 --mode 2560x1440 --pos 1920x0 --rotate normal --output DP-3 --off --output DP-4 --mode 1920x1080 --pos 0x360 --rotate normal --output DP-5 --off --output None-1-1 --off
-#exec --no-startup-id "/home/$USER/.config/polybar/scripts/polybarstart.sh"
-exec --no-startup-id "/home/$USER/.config/polybar/scripts/polybarstart.sh"
+exec --no-startup-id /home/$USER/.config/i3/scripts/set_wallpaper.sh
+exec --no-startup-id polybar
 exec --no-startup-id picom
 exec --no-startup-id dunst -config "/home/$USER/.config/dunst/dunstrc"
 exec --no-startup-id pactl set-card-profile "alsa_card.pci-0000_2b_00.1" "output:hdmi-stereo-extra1"
-exec --no-startup-id xset r rate 200 30
+exec --no-startup-id xset r rate 300 40
+# set primary monitor (arandr)
+exec --no-startup-id /home/$USER/.screenlayout/screen.sh
+exec --no-startup-id ibus-daemon -rxRd
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
@@ -128,8 +131,8 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-bindsym $mod+g gaps inner all plus 5
-bindsym $mod+Shift+g gaps inner all minus 5
+bindsym $mod+g gaps inner all plus 10
+bindsym $mod+Shift+g gaps inner all minus 10
 
 
 # Define names for default workspaces for which we configure key bindings later on.
@@ -205,9 +208,13 @@ mode "resize" {
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
+bindsym $mod+Ctrl+h resize shrink width 2 px or 2 ppt
+bindsym $mod+Ctrl+j resize grow height 2 px or 2 ppt
+bindsym $mod+Ctrl+k resize shrink height 2 px or 2 ppt
+bindsym $mod+Ctrl+l resize grow width 2 px or 2 ppt
+
+# toggle input language (us, zh)
+bindsym Ctrl+$mod+space exec --no-startup-id /home/$USER/.config/i3/scripts/switch_input.sh
 
 bindsym $mod+r mode "resize"
 
-bar {
-        status_command i3status
-}
