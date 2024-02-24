@@ -20,15 +20,16 @@ rm -rf paru
 paru -S --needed - < packages.txt
 
 # App drun shortcuts
-cp ./applications/* /home/$MING/.local/share/applications/
+sudo mkdir -p /home/$MIND/.local/share/applications
+sudo cp ./applications/* /home/$MING/.local/share/applications/
 
 
 #lightdm config
-cp ./lightdm/lightdm-gtk-greeter.conf /etc/lightdm/
+sudo cp ./lightdm/lightdm-gtk-greeter.conf /etc/lightdm/
 # It only works if images are here....
-mkdir -p /usr/share/backgrounds
-cp ./lightdm/*.png /usr/share/backgrounds/
-cp ./lightdm/lightdm.png /home/$MING/Pictures/wallpapers/
+sudo mkdir -p /usr/share/backgrounds
+sudo cp ./lightdm/*.png /usr/share/backgrounds/
+sudo cp ./lightdm/lightdm.png /home/$MING/Pictures/wallpapers/
 
 
 #set permissions
